@@ -1,4 +1,5 @@
-import { App, Modal, Notice, Plugin, PluginSettingTab, Setting } from 'obsidian';
+import { App, Modal, Notice, Plugin, PluginSettingTab, Setting, parseYaml, MarkdownPostProcessorContext, Menu, Editor, MarkdownView } from 'obsidian';
+import { addIcons, PLOTLY_LOGO } from "./icons";
 
 interface MyPluginSettings {
 	mySetting: string;
@@ -11,23 +12,34 @@ const DEFAULT_SETTINGS: MyPluginSettings = {
 export default class MyPlugin extends Plugin {
 	settings: MyPluginSettings;
 
+	preprocessor = async (content: string, el: HTMLElement, ctx: MarkdownPostProcessorContext)=>{
+		let json;
+		try{
+			json = await JSON.parse(content);
+		} catch (error) {
+			el.innerHTML = "Couldn't render Chart:<br><pre><code style=\"color:crimson\">" + error + "</code></pre>";
+		}
+	}
+
 	async onload() {
 		console.log('loading plugin');
 
 		await this.loadSettings();
 
-		this.addRibbonIcon('dice', 'Sample Plugin', () => {
-			new Notice('This is a notice!');
+		addIcons();
+
+		this.addRibbonIcon(PLOTLY_LOGO, 'New plot', () => {
+			new Notice('This should add new plot to a note. To be implemented...');
 		});
 
 		this.addStatusBarItem().setText('Status Bar Text');
 
 		this.addCommand({
-			id: 'open-sample-modal',
-			name: 'Open Sample Modal',
-			// callback: () => {
-			// 	console.log('Simple Callback');
-			// },
+			id: 'plotly-new-plot',
+			name: 'New plot',
+			callback: () => {
+				console.log('This should create new plot.');
+			},
 			checkCallback: (checking: boolean) => {
 				let leaf = this.app.workspace.activeLeaf;
 				if (leaf) {
@@ -46,11 +58,28 @@ export default class MyPlugin extends Plugin {
 			console.log('codemirror', cm);
 		});
 
+
 		this.registerDomEvent(document, 'click', (evt: MouseEvent) => {
 			console.log('click', evt);
 		});
 
 		this.registerInterval(window.setInterval(() => console.log('setInterval'), 5 * 60 * 1000));
+
+		this.registerMarkdownCodeBlockProcessor('plotly', this.preprocessor);
+
+		//@ts-ignore
+		this.registerEvent(this.app.workspace.on('editor-menu',
+		(menu: Menu, editor: Editor, view: MarkdownView) => {
+			if (view) {
+				menu.addItem((item) => {
+					item.setTitle("New Plotly Chart")
+						.setIcon(PLOTLY_LOGO)
+						.onClick((_) => {
+							console.log("New Plotly Chart clicked.");
+						});
+				});
+			}
+		}));
 	}
 
 	onunload() {
