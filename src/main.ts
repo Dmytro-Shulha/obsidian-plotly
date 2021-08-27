@@ -1,5 +1,6 @@
 import { App, Modal, Notice, Plugin, PluginSettingTab, Setting, parseYaml, MarkdownPostProcessorContext, Menu, Editor, MarkdownView } from 'obsidian';
 import { addIcons, PLOTLY_LOGO } from "./icons";
+import { preprocessor } from './preprocessor'
 
 interface MyPluginSettings {
 	mySetting: string;
@@ -11,15 +12,6 @@ const DEFAULT_SETTINGS: MyPluginSettings = {
 
 export default class MyPlugin extends Plugin {
 	settings: MyPluginSettings;
-
-	preprocessor = async (content: string, el: HTMLElement, ctx: MarkdownPostProcessorContext)=>{
-		let json;
-		try{
-			json = await JSON.parse(content);
-		} catch (error) {
-			el.innerHTML = "Couldn't render Chart:<br><pre><code style=\"color:crimson\">" + error + "</code></pre>";
-		}
-	}
 
 	async onload() {
 		console.log('loading plugin');
@@ -58,14 +50,13 @@ export default class MyPlugin extends Plugin {
 			console.log('codemirror', cm);
 		});
 
-
 		this.registerDomEvent(document, 'click', (evt: MouseEvent) => {
 			console.log('click', evt);
 		});
 
 		this.registerInterval(window.setInterval(() => console.log('setInterval'), 5 * 60 * 1000));
 
-		this.registerMarkdownCodeBlockProcessor('plotly', this.preprocessor);
+		this.registerMarkdownCodeBlockProcessor('plotly', preprocessor);
 
 		//@ts-ignore
 		this.registerEvent(this.app.workspace.on('editor-menu',
