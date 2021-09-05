@@ -1,11 +1,14 @@
 import * as Plotly from 'plotly.js-dist-min';
-import { MarkdownPostProcessorContext } from "obsidian";
+import { parseYaml, MarkdownPostProcessorContext } from "obsidian";
 
 export const preprocessor = async (content: string, el: HTMLElement, ctx: MarkdownPostProcessorContext)=>{
     let json;
     try{
-        json = await JSON.parse(content);
+        json = await parseYaml(content);
 
+        console.log("Parsed value:");
+        console.log(json);
+        
         validate(json, el)
 
         const destination = document.createElement('div');
