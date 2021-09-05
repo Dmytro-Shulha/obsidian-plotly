@@ -1,22 +1,18 @@
-import { App, Modal, Notice, Plugin, PluginSettingTab, Setting, parseYaml, MarkdownPostProcessorContext, Menu, Editor, MarkdownView } from 'obsidian';
-import { addIcons, PLOTLY_LOGO } from "./icons";
-import { preprocessor } from './preprocessor'
+import { App, Modal, Notice, Plugin, PluginSettingTab, Setting, Menu, Editor, MarkdownView } from 'obsidian';
+import { addIcons, PLOTLY_LOGO } from "./ui/icons";
+import { preprocessor } from './preprocessor';
+import PlotlyModal from './ui/modal';
+import PlotlyPluginSettingTab from './ui/settings';
 
-interface MyPluginSettings {
-	mySetting: string;
-}
-
-const DEFAULT_SETTINGS: MyPluginSettings = {
-	mySetting: 'default'
-}
-
-export default class MyPlugin extends Plugin {
-	settings: MyPluginSettings;
+export default class PlotlyPlugin extends Plugin {
+	settingsTab: PlotlyPluginSettingTab;
 
 	async onload() {
 		console.log('loading plugin');
-
-		await this.loadSettings();
+		
+		this.settingsTab = new PlotlyPluginSettingTab(this.app, this)
+		await this.settingsTab.loadSettings();
+		this.addSettingTab(this.settingsTab);
 
 		addIcons();
 
@@ -36,15 +32,13 @@ export default class MyPlugin extends Plugin {
 				let leaf = this.app.workspace.activeLeaf;
 				if (leaf) {
 					if (!checking) {
-						new SampleModal(this.app).open();
+						new PlotlyModal(this.app).open();
 					}
 					return true;
 				}
 				return false;
 			}
 		});
-
-		this.addSettingTab(new SampleSettingTab(this.app, this));
 
 		this.registerCodeMirror((cm: CodeMirror.Editor) => {
 			console.log('codemirror', cm);
@@ -75,58 +69,5 @@ export default class MyPlugin extends Plugin {
 
 	onunload() {
 		console.log('unloading plugin');
-	}
-
-	async loadSettings() {
-		this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
-	}
-
-	async saveSettings() {
-		await this.saveData(this.settings);
-	}
-}
-
-class SampleModal extends Modal {
-	constructor(app: App) {
-		super(app);
-	}
-
-	onOpen() {
-		let {contentEl} = this;
-		contentEl.setText('Woah!');
-	}
-
-	onClose() {
-		let {contentEl} = this;
-		contentEl.empty();
-	}
-}
-
-class SampleSettingTab extends PluginSettingTab {
-	plugin: MyPlugin;
-
-	constructor(app: App, plugin: MyPlugin) {
-		super(app, plugin);
-		this.plugin = plugin;
-	}
-
-	display(): void {
-		let {containerEl} = this;
-
-		containerEl.empty();
-
-		containerEl.createEl('h2', {text: 'Settings for my awesome plugin.'});
-
-		new Setting(containerEl)
-			.setName('Setting #1')
-			.setDesc('It\'s a secret')
-			.addText(text => text
-				.setPlaceholder('Enter your secret')
-				.setValue('')
-				.onChange(async (value) => {
-					console.log('Secret: ' + value);
-					this.plugin.settings.mySetting = value;
-					await this.plugin.saveSettings();
-				}));
 	}
 }

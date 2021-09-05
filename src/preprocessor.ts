@@ -6,9 +6,6 @@ export const preprocessor = async (content: string, el: HTMLElement, ctx: Markdo
     try{
         json = await parseYaml(content);
 
-        console.log("Parsed value:");
-        console.log(json);
-        
         validate(json, el)
 
         const destination = document.createElement('div');
