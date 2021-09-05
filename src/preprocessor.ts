@@ -1,4 +1,4 @@
-import * as Plotly from 'plotly.js/lib/core'
+import * as Plotly from 'plotly.js-dist-min';
 import { MarkdownPostProcessorContext } from "obsidian";
 
 export const preprocessor = async (content: string, el: HTMLElement, ctx: MarkdownPostProcessorContext)=>{
