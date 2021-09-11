@@ -3,6 +3,7 @@ import { addIcons, PLOTLY_LOGO } from "./ui/icons";
 import { preprocessor } from './preprocessor';
 import PlotlyModal from './ui/modal';
 import PlotlyPluginSettingTab from './ui/settingsTab'
+import './show-hint'
 
 export default class PlotlyPlugin extends Plugin {
 	settingsTab: PlotlyPluginSettingTab;
