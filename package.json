@@ -1,6 +1,6 @@
 {
   "name": "obsidian-plotly",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Obsidian plugin, which allow user to embed Plotly charts into markdown notes.",
   "main": "src/main.js",
   "scripts": {
