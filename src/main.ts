@@ -17,30 +17,6 @@ export default class PlotlyPlugin extends Plugin {
 
 		addIcons();
 
-		this.addRibbonIcon(PLOTLY_LOGO, 'New plot', () => {
-			new Notice('This should add new plot to a note. To be implemented...');
-		});
-
-		this.addStatusBarItem().setText('Status Bar Text');
-
-		this.addCommand({
-			id: 'plotly-new-plot',
-			name: 'New plot',
-			callback: () => {
-				console.log('This should create new plot.');
-			},
-			checkCallback: (checking: boolean) => {
-				let leaf = this.app.workspace.activeLeaf;
-				if (leaf) {
-					if (!checking) {
-						new PlotlyModal(this.app).open();
-					}
-					return true;
-				}
-				return false;
-			}
-		});
-
 		this.registerCodeMirror((cm: CodeMirror.Editor) => {
 			console.log('codemirror', cm);
 		});
@@ -63,7 +39,7 @@ export default class PlotlyPlugin extends Plugin {
 						.onClick((_) => {
 							let doc = editor.getDoc();
 							let cursor = doc.getCursor();
-							doc.replaceRange('```plotly\n```\n', cursor);
+							doc.replaceRange("```plotly\ndata:\n\t- x: [0,1,2]\n\t  y: [0,1,0]\n```\n", cursor);
 						});
 				});
 			}
