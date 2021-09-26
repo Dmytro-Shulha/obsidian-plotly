@@ -13,7 +13,7 @@ export default class PlotlyPlugin extends Plugin {
 		
 		this.settingsTab = new PlotlyPluginSettingTab(this.app, this)
 		await this.settingsTab.loadSettings();
-		this.addSettingTab(this.settingsTab);
+		// this.addSettingTab(this.settingsTab);
 
 		addIcons();
 
