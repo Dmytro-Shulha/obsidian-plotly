@@ -5,11 +5,18 @@ import PlotlyModal from './ui/modal';
 import PlotlyPluginSettingTab from './ui/settingsTab'
 import './show-hint'
 
+const NEW_PLOTLY_CHART_NAME = "New Plotly Chart";
+const newPlotlyChart = (editor: Editor)=>{
+	let doc = editor.getDoc();
+	let cursor = doc.getCursor();
+	doc.replaceRange("```plotly\ndata:\n\t- x: [0,1,2]\n\t  y: [0,1,0]\n```\n", cursor);
+}
+
 export default class PlotlyPlugin extends Plugin {
 	settingsTab: PlotlyPluginSettingTab;
 
 	async onload() {
-		console.log('loading plugin');
+		console.log('loading Plotly plugin');
 		
 		this.settingsTab = new PlotlyPluginSettingTab(this.app, this)
 		await this.settingsTab.loadSettings();
@@ -34,19 +41,21 @@ export default class PlotlyPlugin extends Plugin {
 		(menu: Menu, editor: Editor, view: MarkdownView) => {
 			if (view) {
 				menu.addItem((item) => {
-					item.setTitle("New Plotly Chart")
+					item.setTitle(NEW_PLOTLY_CHART_NAME)
 						.setIcon(PLOTLY_LOGO)
-						.onClick((_) => {
-							let doc = editor.getDoc();
-							let cursor = doc.getCursor();
-							doc.replaceRange("```plotly\ndata:\n\t- x: [0,1,2]\n\t  y: [0,1,0]\n```\n", cursor);
-						});
+						.onClick((_)=>newPlotlyChart(editor));
 				});
 			}
 		}));
+
+		this.addCommand({
+			id: "add-plotly-example",
+			name: NEW_PLOTLY_CHART_NAME,
+			editorCallback: (editor: Editor, view: MarkdownView)=>newPlotlyChart(editor)
+		});
 	}
 
 	onunload() {
-		console.log('unloading plugin');
+		console.log('unloading Plotly plugin');
 	}
 }
