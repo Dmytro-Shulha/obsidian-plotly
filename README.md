@@ -3,7 +3,7 @@ Obsidian plugin, which allow user to embed Plotly charts into markdown notes.
 
 ## Usage
 Use double-click to add basic plotly template: 
-![Double-click example](./media/plotly-doubleclick-demo.gif)
+![Command example](./media/plotly-command-demo.gif)
 
 ## Examples
 Plugin supports both JSON and YAML formats.
