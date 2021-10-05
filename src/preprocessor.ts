@@ -1,10 +1,11 @@
 import * as Plotly from 'plotly.js-dist-min';
-import { parseYaml, MarkdownPostProcessorContext } from "obsidian";
 
-export const preprocessor = async (content: string, el: HTMLElement, ctx: MarkdownPostProcessorContext)=>{
+import { MarkdownPostProcessorContext, parseYaml } from "obsidian";
+
+export const preprocessor = (content: string, el: HTMLElement, ctx: MarkdownPostProcessorContext)=>{
     let json;
     try{
-        json = await parseYaml(content);
+        json = parseYaml(content);
 
         validate(json, el)
 
@@ -20,8 +21,6 @@ export const preprocessor = async (content: string, el: HTMLElement, ctx: Markdo
     } catch (error) {
         el.innerHTML = "Couldn't render plot:<br><pre><code style=\"color:crimson\">" + error + "</code></pre>";
     }
-
-    console.log(json);
 }
 
 const allowValues = ["data", "layout", "config"];
