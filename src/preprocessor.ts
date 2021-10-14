@@ -19,7 +19,9 @@ export const preprocessor = (content: string, el: HTMLElement, ctx: MarkdownPost
             el.appendChild(destination);
         }  
     } catch (error) {
-        el.innerHTML = "Couldn't render plot:<br><pre><code style=\"color:crimson\">" + error + "</code></pre>";
+        let errorDiv = document.createElement('div');
+        errorDiv.textContent = "Couldn't render plot:" + error;
+        el.appendChild(errorDiv);
     }
 }
 
