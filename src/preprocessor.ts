@@ -6,18 +6,8 @@ export const preprocessor = (content: string, el: HTMLElement, ctx: MarkdownPost
     let json;
     try{
         json = parseYaml(content);
-
         validate(json, el)
-
-        const destination = document.createElement('div');
-
-        if(el.firstElementChild!=null){
-            Plotly.update(destination, json.data, json.layout, json.config);        
-            el.replaceChild(destination, el.firstElementChild);
-        } else {
-            Plotly.newPlot(destination, json.data, json.layout, json.config);        
-            el.appendChild(destination);
-        }  
+        render(json, el)
     } catch (error) {
         let errorDiv = document.createElement('div');
         errorDiv.textContent = "Couldn't render plot:" + error;
@@ -37,4 +27,20 @@ const validate = (json: any, el: HTMLElement) => {
             throw "The only valid keys are data, layout and config."
         }
     })
+}
+
+const render = (json: any, el: HTMLElement) => {
+    renderPlotly(el, json.data, json.layout, json.config)
+}
+
+export const renderPlotly = (el: HTMLElement, data: Object[], layout: Object, config: Object) => {
+    const destination = document.createElement('div');
+
+    if(el.firstElementChild!=null){
+        Plotly.update(destination, data as any, layout, config as any);        
+        el.replaceChild(destination, el.firstElementChild);
+    } else {
+        Plotly.newPlot(destination, data, layout, config);        
+        el.appendChild(destination);
+    }
 }
