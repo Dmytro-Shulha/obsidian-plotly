@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "Plotly example.md",
+            "file": "Workbench.md",
             "mode": "source"
           }
         }
@@ -68,7 +68,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Plotly example.md",
+                "file": "Workbench.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -88,6 +88,7 @@
   },
   "active": "f778198bfc3f519f",
   "lastOpenFiles": [
+    "Workbench.md",
     "Plotly example.md"
   ]
 }

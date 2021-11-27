@@ -1,8 +1,8 @@
-import typescript from '@rollup/plugin-typescript';
-import {nodeResolve} from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-import svgo from 'rollup-plugin-svgo';
 import json from '@rollup/plugin-json';
+import {nodeResolve} from '@rollup/plugin-node-resolve';
+import svgo from 'rollup-plugin-svgo';
+import typescript from '@rollup/plugin-typescript';
 
 const isProd = (process.env.BUILD === 'production');
 
@@ -16,7 +16,7 @@ if you want to view the source visit the plugins github repository
 export default {
   input: 'src/main.ts',
   output: {
-    dir: './build/',
+    dir: './vault/.obsidian/plugins/plotly-test',
     sourcemap: 'inline',
     sourcemapExcludeSources: isProd,
     format: 'cjs',

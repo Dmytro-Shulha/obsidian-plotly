@@ -1,0 +1,10 @@
+{
+	"id": "obsidian-plotly",
+	"name": "Plotly",
+	"version": "0.0.6",
+	"minAppVersion": "0.9.12",
+	"description": "Obsidian plugin, which allow user to embed Plotly charts into markdown notes.",
+	"author": "Dmitriy Shulha",
+	"authorUrl": "https://github.com/Dmitriy-Shulha",
+	"isDesktopOnly": false
+}
