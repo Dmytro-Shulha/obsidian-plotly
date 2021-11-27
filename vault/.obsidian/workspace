@@ -1,0 +1,93 @@
+{
+  "main": {
+    "id": "ac98efc9c5a7ba57",
+    "type": "split",
+    "children": [
+      {
+        "id": "f778198bfc3f519f",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "Plotly example.md",
+            "mode": "source"
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "f39e62a770bfbfd8",
+    "type": "split",
+    "children": [
+      {
+        "id": "0b2ef9ce55ed1588",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "3dcde1f907e3c524",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "39c6a9f665b7a184",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "036736d1ad1ae070",
+    "type": "split",
+    "children": [
+      {
+        "id": "21b1a69628892309",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "5195fa96c36fef76",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Plotly example.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "f778198bfc3f519f",
+  "lastOpenFiles": [
+    "Plotly example.md"
+  ]
+}
