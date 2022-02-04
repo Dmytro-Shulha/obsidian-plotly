@@ -7,7 +7,7 @@ pievalues: [12, 20, 50, 30]
 
 # Welcome to some examples
 By Damon-Lee Pointon
-Throw this file into your vault of choice and make sure you have atleast Dataview and of course this obsidian-plotly plugin installed and running.
+Throw this file into your vault (by downloading the examples.md file as Raw) of choice and make sure you have atleast Dataview and of course this obsidian-plotly plugin installed and running.
 
 Dependant on your system you may have to change the back slash with a forward slash. I'm using a Mac so backslashes are the norm.
 
