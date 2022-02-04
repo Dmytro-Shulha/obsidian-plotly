@@ -77,6 +77,6 @@ If you need this library, there is a workaround: you can download d3 library fro
 ```
 
 # Examples
-TODO: create vault to test this plugin with examples.
+Some more obsidian examples of this plugin [here](examples.md)
 
 More examples on [Plotly](https://plotly.com/javascript/) official site.
