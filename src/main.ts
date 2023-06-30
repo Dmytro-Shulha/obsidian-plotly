@@ -6,8 +6,8 @@ import { preprocessor, renderPlotly } from './preprocessor';
 const basicPlotlyChart = [
 	'```plotly',
 	'data:',
-	'\t- x: [0,1,2]',
-	'\t  y: [0,1,0]',
+	'- x: [0,1,2]',
+	'  y: [0,1,0]',
 	'```\n'
 ].join('\n')
 const NEW_PLOTLY_CHART_NAME = "New Plotly Chart";
